@@ -4,3 +4,11 @@ server.port: 9196
 spring.autoconfigure.exclude:
   - org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration
   - org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration
+
+
+spring.mail.host: smtp.gmail.com
+spring.mail.port: 587
+spring.mail.username: liamswainv@gmail.com
+spring.mail.password: yjwapwacaospxixk
+spring.mail.properties.mail.smtp.auth: true
+spring.mail.properties.mail.smtp.starttls.enable: true
