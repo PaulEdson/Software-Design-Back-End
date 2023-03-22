@@ -1,9 +1,9 @@
 package com.liam.softwaredesign.serviceImpl;
 
 import com.liam.softwaredesign.Utils.MailSenderUtils;
-import com.liam.softwaredesign.models.Clients;
-import com.liam.softwaredesign.models.RegisteredClient;
+import com.liam.softwaredesign.models.*;
 import com.liam.softwaredesign.repository.ClientRepository;
+import com.liam.softwaredesign.repository.FuelQuoteHistory;
 import com.liam.softwaredesign.repository.RegisteredClientRepository;
 import com.liam.softwaredesign.service.SoftwareDesign;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +22,9 @@ public class SoftwareDesignImpl implements SoftwareDesign {
 
     @Autowired
     RegisteredClientRepository registeredClientRepository;
+
+    @Autowired
+    FuelQuoteHistory fuelQuoteHistory;
 
     @Override
     public Clients getAllClients() {
@@ -67,6 +70,44 @@ public class SoftwareDesignImpl implements SoftwareDesign {
 
         return newClient;
 
+    }
+
+    @Override
+    public FuelQuoteForm insertNewFuelQuote(FuelQuoteForm fuelQuoteForm){
+
+        List<FuelQuoteForm> fuelQuoteFormList = fuelQuoteHistory.findAll();
+
+        for(int i = 0; i < fuelQuoteFormList.size(); i++){
+            if(fuelQuoteFormList.get(i).equals(fuelQuoteForm)){
+                return null;
+            }
+        }
+
+        fuelQuoteHistory.save(fuelQuoteForm);
+
+        return fuelQuoteForm;
+    }
+
+    @Override
+    public FuelQuotes getUserQuoteHistory(FuelQuoteRequest fuelQuoteRequest) {
+        FuelQuotes fuelQuotes = new FuelQuotes();
+
+        List<FuelQuoteForm> fuelQuoteFormList = fuelQuoteHistory.findByUser(fuelQuoteRequest.getUsername());
+
+        fuelQuotes.setFuelQuotesFormList(fuelQuoteFormList);
+
+        return fuelQuotes;
+    }
+
+    @Override
+    public FuelQuotes getAllQuoteHistory() {
+        FuelQuotes fuelQuotes = new FuelQuotes();
+
+        List<FuelQuoteForm> fuelQuoteFormList = fuelQuoteHistory.findAll();
+
+        fuelQuotes.setFuelQuotesFormList(fuelQuoteFormList);
+
+        return fuelQuotes;
     }
 
     @Override

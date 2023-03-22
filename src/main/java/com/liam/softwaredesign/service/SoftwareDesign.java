@@ -1,7 +1,6 @@
 package com.liam.softwaredesign.service;
 
-import com.liam.softwaredesign.models.Clients;
-import com.liam.softwaredesign.models.RegisteredClient;
+import com.liam.softwaredesign.models.*;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
@@ -15,4 +14,11 @@ public interface SoftwareDesign {
 
 
     RegisteredClient registerNewClient(RegisteredClient registeredClient);
+
+
+    FuelQuoteForm insertNewFuelQuote(FuelQuoteForm fuelQuoteForm);
+
+    FuelQuotes getUserQuoteHistory(FuelQuoteRequest fuelQuoteRequest);
+
+    FuelQuotes getAllQuoteHistory();
 }
