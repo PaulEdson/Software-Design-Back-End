@@ -15,6 +15,7 @@ public interface SoftwareDesign {
 
     RegisteredClient registerNewClient(RegisteredClient registeredClient);
 
+    RegisteredClient verifyLogin(RegisteredClient registeredClient);
 
     FuelQuoteForm insertNewFuelQuote(FuelQuoteForm fuelQuoteForm);
 

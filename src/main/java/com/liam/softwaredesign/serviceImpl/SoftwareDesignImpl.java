@@ -1,5 +1,7 @@
 package com.liam.softwaredesign.serviceImpl;
 
+
+
 import com.liam.softwaredesign.Utils.MailSenderUtils;
 import com.liam.softwaredesign.models.*;
 import com.liam.softwaredesign.repository.ClientRepository;
@@ -71,6 +73,29 @@ public class SoftwareDesignImpl implements SoftwareDesign {
         return newClient;
 
     }
+    
+    //return given login info if it is contained in the registered user database, otherwise returns null
+    public RegisteredClient verifyLogin(RegisteredClient registeredClient){
+        RegisteredClient newClient = null;
+        List<RegisteredClient> registeredClientList = registeredClientRepository.findAll();
+        boolean alreadyExist = false;
+
+        //checking username and password for each user in database
+        for(int i = 0; i < registeredClientList.size(); i++){
+            if(registeredClientList.get(i).getUsername().toLowerCase().compareTo(registeredClient.getUsername().toLowerCase()) == 0){
+                if(registeredClientList.get(i).getPassword().toLowerCase().compareTo(registeredClient.getPassword().toLowerCase()) == 0){
+                    alreadyExist = true;
+                }
+            }
+        }
+        
+        if(alreadyExist){
+            return registeredClient;
+        } 
+        return newClient;
+
+    }
+
 
     @Override
     public FuelQuoteForm insertNewFuelQuote(FuelQuoteForm fuelQuoteForm){

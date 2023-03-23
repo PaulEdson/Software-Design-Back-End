@@ -54,4 +54,10 @@ public class SoftwareController {
         log.info("Inside Register User");
         return softwareDesign.registerNewClient(registeredClient);
     }
+
+    @PostMapping("/verifyLogin")
+    public RegisteredClient verifyLogin(@RequestBody RegisteredClient registeredClient){
+        return softwareDesign.verifyLogin(registeredClient);
+    }
+
 }
