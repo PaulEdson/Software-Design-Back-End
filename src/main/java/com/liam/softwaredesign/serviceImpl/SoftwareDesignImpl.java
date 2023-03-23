@@ -78,20 +78,16 @@ public class SoftwareDesignImpl implements SoftwareDesign {
     public RegisteredClient verifyLogin(RegisteredClient registeredClient){
         RegisteredClient newClient = null;
         List<RegisteredClient> registeredClientList = registeredClientRepository.findAll();
-        boolean alreadyExist = false;
 
         //checking username and password for each user in database
         for(int i = 0; i < registeredClientList.size(); i++){
             if(registeredClientList.get(i).getUsername().toLowerCase().compareTo(registeredClient.getUsername().toLowerCase()) == 0){
                 if(registeredClientList.get(i).getPassword().toLowerCase().compareTo(registeredClient.getPassword().toLowerCase()) == 0){
-                    alreadyExist = true;
+                    newClient = registeredClientList.get(i);
                 }
             }
         }
         
-        if(alreadyExist){
-            return registeredClient;
-        } 
         return newClient;
 
     }
