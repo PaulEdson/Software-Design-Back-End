@@ -11,9 +11,9 @@ import java.util.List;
 @Document(collection="Clients")
 public class Clients {
 
-    private String name;
-
     @Id
+    private String id;
+    private String name;
     private String user;
     private String active;
     private List<String> roles;
