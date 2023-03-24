@@ -16,6 +16,8 @@ import java.util.List;
 @Configuration
 public class SoftwareDesignImpl implements SoftwareDesign {
 
+    RegisteredClient loggedInUser = null;
+
     @Autowired
     ClientRepository clientRepository;
 
@@ -76,20 +78,25 @@ public class SoftwareDesignImpl implements SoftwareDesign {
     
     //return given login info if it is contained in the registered user database, otherwise returns null
     public RegisteredClient verifyLogin(RegisteredClient registeredClient){
-        RegisteredClient newClient = null;
+        this.loggedInUser = null;
         List<RegisteredClient> registeredClientList = registeredClientRepository.findAll();
 
         //checking username and password for each user in database
         for(int i = 0; i < registeredClientList.size(); i++){
             if(registeredClientList.get(i).getUsername().toLowerCase().compareTo(registeredClient.getUsername().toLowerCase()) == 0){
                 if(registeredClientList.get(i).getPassword().toLowerCase().compareTo(registeredClient.getPassword().toLowerCase()) == 0){
-                    newClient = registeredClientList.get(i);
+                    this.loggedInUser = registeredClientList.get(i);
                 }
             }
         }
         
-        return newClient;
+        //new client = null if not correct login info, otherwise newClient refers to RegiteredClient Object
+        return this.loggedInUser;
 
+    }
+
+    public RegisteredClient getLoggedInUser(){
+        return this.loggedInUser;
     }
 
 

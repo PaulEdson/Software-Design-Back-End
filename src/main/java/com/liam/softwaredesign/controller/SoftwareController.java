@@ -60,4 +60,9 @@ public class SoftwareController {
         return softwareDesign.verifyLogin(registeredClient);
     }
 
+    @PostMapping("/getLoggedInUser")
+    public RegisteredClient getLoggedInUser(){
+        return softwareDesign.getLoggedInUser();
+}
+
 }
